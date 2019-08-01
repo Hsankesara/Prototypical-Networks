@@ -1,0 +1,5 @@
+env: "pytorch-1.0:py2"
+input:
+  - destination: omniglot
+    source: wxdao/datasets/omniglot/2
+machine: gpu
