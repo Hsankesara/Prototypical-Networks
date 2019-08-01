@@ -1,6 +1,6 @@
 # Prototypical Networks
 
-[![Run on FloydHub](https://static.floydhub.com/button/button-small.svg)](https://www.floydhub.com/hsankesara/workspaces/run_4Jkab5hfbYtSVt2WWqXLpd2D)
+[![Run on FloydHub](https://static.floydhub.com/button/button-small.svg)](https://floydhub.com/run)
 
 > Artificial Intelligence is the new electricity - Andrew NG
 
