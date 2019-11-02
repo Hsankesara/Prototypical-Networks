@@ -6,6 +6,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 from tqdm import trange
 from time import sleep
+import numpy as np
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
 
@@ -154,7 +155,7 @@ class PrototypicalNet(nn.Module):
         return Qx
 
 
-def train_step(protonet, datax, datay, Ns, Nc, Nq):
+def train_step(protonet, datax, datay, Ns, Nc, Nq, optimizer):
     optimizer.zero_grad()
     Qx, Qy = protonet(datax, datay, Ns, Nc, Nq, np.unique(datay))
     pred = torch.log_softmax(Qx, dim=-1)

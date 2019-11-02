@@ -53,26 +53,27 @@ protonet = load_weights('./protonet.pt', protonet, use_gpu)
 Or simply train one by yourself
 
 ```python
+import torch.optim as optim
 # Set training iterations and display period
-    num_episode = 16000
-    frame_size = 1000
-    trainx = trainx.permute(0, 3, 1, 2)
-    testx = testx.permute(0, 3, 1, 2)
-
-    # Initializing prototypical net
-    protonet = PrototypicalNet(use_gpu)
-    # Training loop
-    frame_loss = 0
-    frame_acc = 0
-    for i in range(num_episode):
-        loss, acc = train_step(protonet, trainx, trainy, 5, 60, 5)
-        frame_loss += loss.data
-        frame_acc += acc.data
-        if((i+1) % frame_size == 0):
-            print("Frame Number:", ((i+1) // frame_size), 'Frame Loss: ', frame_loss.data.cpu().numpy().tolist() /
-                  frame_size, 'Frame Accuracy:', (frame_acc.data.cpu().numpy().tolist() * 100) / frame_size)
-            frame_loss = 0
-            frame_acc = 0
+num_episode = 16000
+frame_size = 1000
+trainx = trainx.permute(0, 3, 1, 2)
+testx = testx.permute(0, 3, 1, 2)
+# Initializing prototypical net
+protonet = PrototypicalNet(use_gpu)
+optimizer = optim.SGD(protonet.parameters(), lr = 0.01, momentum=0.99)
+# Training loop
+frame_loss = 0
+frame_acc = 0
+for i in range(num_episode):
+    loss, acc = train_step(protonet, trainx, trainy, 5, 60, 5, optimizer)
+    frame_loss += loss.data
+    frame_acc += acc.data
+    if((i+1) % frame_size == 0):
+        print("Frame Number:", ((i+1) // frame_size), 'Frame Loss: ',frame_loss.data.cpu().numpy().tolist() /
+              frame_size, 'Frame Accuracy:', (frame_acc.data.cpu().numpy(.tolist() * 100) / frame_size)
+        frame_loss = 0
+        frame_acc = 0
 ```
 
 To know more checkout [this](main.py)
